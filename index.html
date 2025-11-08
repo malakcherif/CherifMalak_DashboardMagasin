@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shop Dashboard</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 8px;
+        padding: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: medium;
+        color: black;
+    }
+
+    @media (max-width: 900px) {
+        .caontainer {
+            flex-direction: column; 
+        }
+
+        aside {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        main {
+            padding: 10px;
+        }
+
+        .filtrage {
+            justify-content: center; 
+        }
+
+        .infos {
+            justify-content: center;
+        }
+    }
+    body { 
+        margin: 0;
+        height: 100vh; 
+        flex: 1;
+        background-color: whitesmoke;
+
+    }
+    @keyframes anim {
+        0% { opacity: 1; }
+        50% { opacity: 0.5;  }
+        100% { opacity: 1;  }
+    }
+    header h1 {  
+        align-items: center;     
+        background-color:rgb(179, 178, 178);
+        color: brown;
+        border-radius: 20px;
+        font-size:x-large;
+        font-family:'Times New Roman', Times, serif;
+        font-weight: bolder;
+        text-align: center;
+        position: sticky;
+        font-style: italic;
+        animation: anim 1s ease-in-out infinite;
+    }
+    .container {
+        display: flex;
+    }
+
+    main{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    aside h2{
+        margin-bottom: 150px;
+    }
+    aside ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    aside ul li {
+        display: grid;
+        gap: 10px;
+        background-color: rgb(250, 239, 239); 
+        border-radius: 12px;
+        margin: 15px ;
+    }
+    aside ul li:hover {
+        background-color: rgb(245, 211, 211); 
+    }
+    aside button{
+        margin-top: 200px;
+    }
+    aside{
+        background:rgb(209, 201, 201);
+        padding:20px;
+        gap: 1px;
+        width:250px;
+        height: 100%;
+        border-radius: 20px;
+        box-shadow:0 1px 5px rgba(198, 155, 181, 0.04);
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;         
+        text-align: center;
+    }
+    #card {
+        display: flex; 
+        gap: 20px; 
+        flex-wrap: wrap; 
+        margin: 20px;
+    }
+    .infos{
+        display: flex;
+        background-color: rgb(241, 183, 183); 
+        flex:1; 
+        height: 100px; 
+        padding: 25px; 
+        border-radius: 12px; 
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        text-align: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .filtrage  {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: flex-end; 
+        font-size:15px;
+        gap: 5px; 
+    }
+    button{
+        border-radius: 12px;
+        padding: 10px;
+        cursor: pointer;
+        background-color: rgb(246, 235, 221);
+    }
+    button:hover{
+        background-color: black;
+        color: white;
+    }
+    
+</style>
+<body>
+    <header>
+      <h1>🛍️Dashboard - Magasin en Ligne🛍️</h1>
+    </header>
+    <div class="container">
+        <aside >
+            <h2>Magasin MC</h2>
+            <ul>
+                <li >Accueil</li>
+                <li>Ventes</li>
+                <li>Stock</li>
+                <li>Produits</li>
+                <li>Contact</li>
+            </ul>
+            
+            <button id="toggleTheme">🌙 Mode Sombre</button>    
+        </aside>
+        
+        <main>
+                <div class="filtrage">
+                    <label for="categorie">Categorie :
+                        <select id="category">
+                            <option value="tous">Tous</option>
+                            <option value="vetements" >Vêtements</option>
+                            <option value="autre">Accessoires</option>
+                            <option value="chaussures">Chaussures</option>
+                        </select>
+                    </label>
+                    <label for="periode">Période :
+                        <select id="period">
+                            <option value="7">7 derniers jours</option>
+                            <option value="1">Dernier mois </option>
+                            <option value="3">3 derniers mois</option>
+                        </select>
+                    </label>    
+                    <button id="start">↓↑Filtrer</button>
+                    <button id="reset">Annuler</button>
+                </div>
+                
+                
+
+            
+            <div id="card">
+                <div class="infos">
+                        <h3>Ventes Totales</h3>
+                        <p id="total">0 DT</p>
+                </div>
+                <div class="infos">
+                        <h3>Produits en Stock</h3>
+                        <p id="stock">0</p>
+                </div>
+                <div class="infos">
+                        <h3>Produit Populaire</h3>
+                        <p id="populaire">!</p>
+                </div>
+            </div>
+
+                <div class="chartjs">
+                    <div class="container">
+                    <h3>Ventes par Jour</h3>
+                    <canvas id="venteChart"></canvas>
+                    </div>
+            
+                    <div class="container">
+                    <h3>Répartition par Catégorie</h3>
+                    <canvas id="categorieChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="meilleur">
+                    <h3>Meilleurs Produits</h3>
+                    <div class="grid" id="top"></div>
+                </div>
+            </div>
+        </main>
+    </div>    
+</body>
+</html>
