@@ -14,16 +14,45 @@
         font-size: medium;
         color: black;
     }
+    body.dark ,body.dark header , body.dark footer{ 
+        background-color: #1e1e2f; 
+        color: #ddd;
+    }
+    body.dark .card, body.dark main {
+        background-color: #2b2b3d; 
+    }
+    body.dark .infos ,body.dark .class_ajoute{
+        background-color: white;
+        color:black;
+    }
 
-    @media (max-width: 900px) {
-        .caontainer {
-            flex-direction: column; 
+    body.dark aside  { 
+        background-color: #51517a; 
+    }
+    body.dark aside ul li { 
+        background-color: white; 
+    }
+    body.dark aside ul li:hover { 
+        background-color: #bebee6; 
+    }
+    body.dark  button ,body.dark .box { 
+        background-color: #cacaea; 
+        color: white;
+    }
+    @media (max-width: 1000px) {
+        body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            flex-direction: row; 
         }
 
         aside {
-            width: 100%;
+            width: auto;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         main {
@@ -31,16 +60,24 @@
         }
 
         .filtrage {
-            justify-content: center; 
+            justify-content: flex-end; 
+            font-size: 0.9vw;
+        }
+        .grid .card, .class_ajoute {
+            max-width: 15vw; /* cartes rétrécissent */
         }
 
+        .grid img, .class_ajoute img {
+            height: auto;
+            width: 100%;
+        }
         .infos {
             justify-content: center;
         }
     }
     body { 
         margin: 0;
-        height: 100vh; 
+        height: 100%; 
         flex: 1;
         background-color: whitesmoke;
 
@@ -52,19 +89,23 @@
     }
     header h1 {  
         align-items: center;     
-        background-color:rgb(179, 178, 178);
+        background:rgb(209, 201, 201);
         color: brown;
         border-radius: 20px;
         font-size:x-large;
         font-family:'Times New Roman', Times, serif;
         font-weight: bolder;
         text-align: center;
-        position: sticky;
         font-style: italic;
         animation: anim 1s ease-in-out infinite;
     }
+    header{
+        position: sticky;
+        top: 0;
+    }
     .container {
         display: flex;
+        flex-direction: row;
     }
 
     main{
@@ -83,9 +124,10 @@
     aside ul li {
         display: grid;
         gap: 10px;
-        background-color: rgb(250, 239, 239); 
+        background-color: rgb(235, 180, 180); 
         border-radius: 12px;
         margin: 15px ;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     aside ul li:hover {
         background-color: rgb(245, 211, 211); 
@@ -98,7 +140,6 @@
         padding:20px;
         gap: 1px;
         width:250px;
-        height: 100%;
         border-radius: 20px;
         box-shadow:0 1px 5px rgba(198, 155, 181, 0.04);
         flex-shrink: 0;
@@ -132,6 +173,11 @@
         font-size:15px;
         gap: 5px; 
     }
+    .filtrage select{
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 500;
+    }
     button{
         border-radius: 12px;
         padding: 10px;
@@ -142,7 +188,86 @@
         background-color: black;
         color: white;
     }
+    .chartjs h3{
+        font-size: 18px;
+        font-weight: 600;
+    }
+    aside h2{
+        font-size: larger;
+        text-transform: uppercase;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    footer,a{
+        background:rgb(209, 201, 201);
+        color: black;
+        text-align: center;
+    }
+    footer{
+        font-size: 10px;
+        border-radius: 20px;
+    }   
+    a{
+        font-size: 15px;
+    }    
+    .grid {
+        display: flex;
+        justify-content: flex-start;
+        gap: 15px;
+        margin: 10px;
+        width: 100px;
+    }
+
+    .grid .card {
+        padding: 10px;
+        border-radius: 12px;
+        background-color: white;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .grid img {
+        align-items: center;
+        width: 100%;
+        border-radius:12px;
+        height:100px;
+        object-fit: cover;
+    }
+
     
+    .class_ajoute {
+        padding: 10px;
+        background: #f4e1e1;
+        border-radius: 10px;
+        margin: 5px;
+        width: 150px;
+        text-align: center;
+    }
+    .class_ajoute img {
+        width: 100px;
+        border-radius: 8px;
+    }
+    .class_ajoute h4{
+        font-weight: bolder;
+        color: brown;
+    }
+    .class_ajoute p span{
+        font-weight:700 ;
+    }
+    .chartjs {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+    }
+    .chartjs .box {
+        flex: 1;
+        min-width: 300px;
+        padding: 15px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
 </style>
 <body>
     <header>
@@ -164,21 +289,19 @@
         
         <main>
                 <div class="filtrage">
-                    <label for="categorie">Categorie :
                         <select id="category">
                             <option value="tous">Tous</option>
                             <option value="vetements" >Vêtements</option>
-                            <option value="autre">Accessoires</option>
-                            <option value="chaussures">Chaussures</option>
+                            <option value="autres">Accessoires</option>
+                            <option value="electro">Eléctroniques</option>
+                            <option value="decor">Meubles maison</option>
                         </select>
-                    </label>
-                    <label for="periode">Période :
                         <select id="period">
-                            <option value="7">7 derniers jours</option>
+                            <option value="rien">Période</option>
                             <option value="1">Dernier mois </option>
                             <option value="3">3 derniers mois</option>
-                        </select>
-                    </label>    
+                            <option value="6">6 derniers mois</option>
+                        </select> 
                     <button id="start">↓↑Filtrer</button>
                     <button id="reset">Annuler</button>
                 </div>
@@ -197,17 +320,17 @@
                 </div>
                 <div class="infos">
                         <h3>Produit Populaire</h3>
-                        <p id="populaire">!</p>
+                        <p id="populaire">- - -</p>
                 </div>
             </div>
 
                 <div class="chartjs">
-                    <div class="container">
+                    <div class="box">
                     <h3>Ventes par Jour</h3>
                     <canvas id="venteChart"></canvas>
                     </div>
             
-                    <div class="container">
+                    <div class="box">
                     <h3>Répartition par Catégorie</h3>
                     <canvas id="categorieChart"></canvas>
                     </div>
@@ -219,6 +342,119 @@
                 </div>
             </div>
         </main>
-    </div>    
+    </div>
+    <footer>
+        <h1>Pour signaler un probleme , voici le contact :</h1>
+        <a href="malak.cherif@etudiant-fst.utm.tn">✉️ malak.cherif@etudiant-fst.utm.tn ✉️</a>
+    </footer>
+    <script>
+        // changer theme
+        const btnMode=document.getElementById("toggleTheme")
+        btnMode.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            if(document.body.classList.contains("dark")){
+                btnMode.textContent = "☀️ Mode Clair";
+            } else {
+                btnMode.textContent = "🌙 Mode Sombre";
+            }
+        });
+
+        // les produitsa suivre 
+        const produits = [
+            { nom: "Set Tendance pour femme", category: "vetements", prix: 99.90, stock: 35, img: "https://cdn.pixabay.com/photo/2020/05/22/14/59/fashion-5205675_960_720.jpg" },
+            { nom: "Costume Bleu pour Homme", category: "vetements", prix: 120.65, stock: 15, img: "https://cdn.pixabay.com/photo/2017/08/10/08/00/suit-2619784_640.jpg" },
+            { nom: "Montre", category: "autres", prix:255.99, stock: 120, img: "https://cdn.pixabay.com/photo/2022/12/14/16/10/ediffice-7655723_640.jpg" },
+            { nom: "Bijoux : Boucles avec bagues", category: "autres", prix: 67.99, stock: 20, img: "https://cdn.pixabay.com/photo/2024/06/18/09/45/jewelry-8837559_640.png" },
+            { nom: "Pc Mac", category: "electro", prix: 4500.99, stock: 250, img: "https://cdn.pixabay.com/photo/2018/02/10/18/16/apple-3144234_640.jpg" },
+            { nom: "Machine à laver", category: "electro", prix: 67.99, stock: 20, img: "https://cdn.pixabay.com/photo/2016/01/28/22/07/washing-machine-1167053_640.jpg" },
+            { nom: "Salon", category: "decor", prix: 2500.5, stock: 100, img: "https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_640.jpg" },
+            { nom: "Salle à manger", category: "decor", prix: 1570.5, stock: 50, img: "https://cdn.pixabay.com/photo/2021/09/20/19/00/dinning-table-6641707_640.jpg" },
+        ];
+
+        function calculVentesTotales(calcul) {
+            let total = 0;
+            calcul.forEach(p => total += p.prix);
+            return total.toFixed(2);
+        }
+
+        function calculStockTotal(calcul) {
+            let total = 0;
+            calcul.forEach(p => total += p.stock);
+            return total;
+        }
+
+        function produitPopulaire(calcul) {
+            let max = calcul.reduce((a, b) => a.stock > b.stock ? a : b);
+            return max.nom;
+        }
+
+        function afficherMeilleurProduits(best) {
+            const top = document.getElementById("top");
+            top.innerHTML = ""; // effacer ancien contenu
+
+            best.sort((a, b) => b.stock - a.stock);
+
+            best.slice(0, 3).forEach(p => {
+                const card = document.createElement("div");
+                card.className = "class_ajoute";
+                card.innerHTML = `
+                    <img src="${p.img}">
+                    <h4>${p.nom}</h4>
+                    <p><span>Prix :</span> \n ${p.prix} DT</p>
+                    <p><span>Stock :</span> \n ${p.stock}</p>
+                `;
+                top.appendChild(card);
+            });
+        }
+
+        function affichage(info) {
+            let total=document.getElementById("total");
+            let stock=document.getElementById("stock");
+            let populaire=document.getElementById("populaire");
+            total.innerText = calculVentesTotales(info) + " DT";
+            stock.innerText = calculStockTotal(info);
+            populaire.innerText = produitPopulaire(info);
+            afficherMeilleurProduits(info);
+        }
+
+       
+        const category = document.getElementById("category");
+        const period = document.getElementById("period");
+        const filterBtn = document.getElementById("start");
+        const resetBtn = document.getElementById("reset");
+ 
+        // graphes 
+        
+
+        // filtrage
+        function filtrer() {
+            let val_cat = category.value;
+
+            let prod = produits;
+
+            if (val_cat !== "tous") {
+                prod = produits.filter(p => p.category === val_cat);
+            }
+            affichage(prod);
+
+
+        }
+
+        filterBtn.addEventListener("click", filtrer);
+
+
+        //effacer filtrage
+        function reset(){
+            category.value="tous";
+            period.value="rien";
+            total.innerText="0 DT";
+            stock.innerText="0";
+            populaire.innerText="- - -";
+            let top=document.getElementById("top");
+            top.innerText="";
+        }
+        resetBtn.addEventListener('click', reset);
+
+    </script>    
 </body>
 </html>
