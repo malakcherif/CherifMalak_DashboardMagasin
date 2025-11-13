@@ -64,12 +64,16 @@
             font-size: 0.9vw;
         }
         .grid .card, .class_ajoute {
-            max-width: 15vw; /* cartes rétrécissent */
+            max-width: 15vw;
         }
 
         .grid img, .class_ajoute img {
             height: auto;
             width: 100%;
+        }
+        .chartjs .box {
+            width: 100%;
+            height: auto;
         }
         .infos {
             justify-content: center;
@@ -121,16 +125,26 @@
         padding: 0;
     }
 
-    aside ul li {
+    aside ul li   {
         display: grid;
         gap: 10px;
         background-color: rgb(235, 180, 180); 
-        border-radius: 12px;
+        border-radius:15px;
         margin: 15px ;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        
     }
-    aside ul li:hover {
+    aside ul li a{
+        
+        text-decoration: none;
+        color: black;
+        background-color: rgb(235, 180, 180); 
+
+    }
+    
+    aside ul li :hover   {
         background-color: rgb(245, 211, 211); 
+
     }
     aside button{
         margin-top: 200px;
@@ -152,6 +166,11 @@
         gap: 20px; 
         flex-wrap: wrap; 
         margin: 20px;
+    }
+    #card p{
+        color:brown;
+        font-size: 15px;
+        font-weight: 600;
     }
     .infos{
         display: flex;
@@ -257,15 +276,14 @@
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
-        margin: 20px 0;
+        margin: 20px ;
     }
     .chartjs .box {
-        flex: 1;
-        min-width: 300px;
+        width: 400px;
+        height: auto;
         padding: 15px;
         background: white;
         border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
 </style>
@@ -273,77 +291,88 @@
     <header>
       <h1>🛍️Dashboard - Magasin en Ligne🛍️</h1>
     </header>
+
     <div class="container">
         <aside >
             <h2>Magasin MC</h2>
             <ul>
-                <li >Accueil</li>
-                <li>Ventes</li>
-                <li>Stock</li>
-                <li>Produits</li>
-                <li>Contact</li>
+                <li><a href="#acceuil">Accueil</a></li>
+                <li><a href="#prod_vente">Ventes</a></li>
+                <li><a href="#prod_stock">Stock</a></li>
+                <li><a href="#prod">Produits</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
             
             <button id="toggleTheme">🌙 Mode Sombre</button>    
         </aside>
         
         <main>
-                <div class="filtrage">
-                        <select id="category">
-                            <option value="tous">Tous</option>
-                            <option value="vetements" >Vêtements</option>
-                            <option value="autres">Accessoires</option>
-                            <option value="electro">Eléctroniques</option>
-                            <option value="decor">Meubles maison</option>
-                        </select>
-                        <select id="period">
-                            <option value="rien">Période</option>
-                            <option value="1">Dernier mois </option>
-                            <option value="3">3 derniers mois</option>
-                            <option value="6">6 derniers mois</option>
-                        </select> 
+            <div class="filtrage" id="acceuil">
+                    <select id="category">
+                        <option value="tous">Tous</option>
+                        <option value="vetements" >Vêtements</option>
+                        <option value="autres">Accessoires</option>
+                        <option value="electro">Eléctroniques</option>
+                        <option value="decor">Meubles maison</option>
+                    </select>
+
+                    
+                    <select id="period">
+                        <option value="rien">Période</option>
+                        <option value="1">Dernier mois </option>
+                        <option value="3">3 derniers mois</option>
+                        <option value="6">6 derniers mois</option>
+                    </select>        
+
                     <button id="start">↓↑Filtrer</button>
                     <button id="reset">Annuler</button>
-                </div>
+            </div>
                 
-                
-
-            
             <div id="card">
                 <div class="infos">
-                        <h3>Ventes Totales</h3>
-                        <p id="total">0 DT</p>
+                    <h3>Ventes Totales</h3>
+                    <p id="total">0 DT</p>
                 </div>
+
                 <div class="infos">
-                        <h3>Produits en Stock</h3>
-                        <p id="stock">0</p>
+                    <h3>Produits en Stock</h3>
+                    <p id="stock">0</p>
                 </div>
+
                 <div class="infos">
-                        <h3>Produit Populaire</h3>
-                        <p id="populaire">- - -</p>
+                    <h3>Produit Populaire</h3>
+                    <p id="populaire">- - -</p>
                 </div>
             </div>
 
                 <div class="chartjs">
-                    <div class="box">
-                    <h3>Ventes par Jour</h3>
-                    <canvas id="venteChart"></canvas>
+                    <div id="prod_vente">
+                        <div class="box">
+                            <h3>Suivie de ventes</h3>
+                            <canvas id="venteChart"></canvas>
+                        </div>
                     </div>
-            
-                    <div class="box">
-                    <h3>Répartition par Catégorie</h3>
-                    <canvas id="categorieChart"></canvas>
+
+                    <div id="prod_stock">
+                        <div class="box">
+                            <h3>Suivie de stock</h3>
+                            <canvas id="stockChart"></canvas>
+                        </div>
                     </div>
+
                 </div>
 
-                <div class="meilleur">
-                    <h3>Meilleurs Produits</h3>
-                    <div class="grid" id="top"></div>
-                </div>
-            </div>
+                <div id="prod">
+
+                    <div class="meilleur">
+                        <h3>Meilleurs Produits</h3>
+                        <div class="grid" id="top"></div>
+                    </div>
+                    
+                </div>    
         </main>
     </div>
-    <footer>
+    <footer id="contact">
         <h1>Pour signaler un probleme , voici le contact :</h1>
         <a href="malak.cherif@etudiant-fst.utm.tn">✉️ malak.cherif@etudiant-fst.utm.tn ✉️</a>
     </footer>
@@ -359,7 +388,7 @@
             }
         });
 
-        // les produitsa suivre 
+        // les produits a suivre 
         const produits = [
             { nom: "Set Tendance pour femme", category: "vetements", prix: 99.90, stock: 35, img: "https://cdn.pixabay.com/photo/2020/05/22/14/59/fashion-5205675_960_720.jpg" },
             { nom: "Costume Bleu pour Homme", category: "vetements", prix: 120.65, stock: 15, img: "https://cdn.pixabay.com/photo/2017/08/10/08/00/suit-2619784_640.jpg" },
@@ -373,18 +402,18 @@
 
         function calculVentesTotales(calcul) {
             let total = 0;
-            calcul.forEach(p => total += p.prix);
+            calcul.forEach(p => total =total + p.prix);
             return total.toFixed(2);
         }
 
         function calculStockTotal(calcul) {
             let total = 0;
-            calcul.forEach(p => total += p.stock);
+            calcul.forEach(p =>total =total + p.stock);
             return total;
         }
 
         function produitPopulaire(calcul) {
-            let max = calcul.reduce((a, b) => a.stock > b.stock ? a : b);
+            let max = calcul.reduce((a, b) => a.stock > b.stock ? a : b); //tcompari qui a stock plus eleve 
             return max.nom;
         }
 
@@ -423,25 +452,78 @@
         const filterBtn = document.getElementById("start");
         const resetBtn = document.getElementById("reset");
  
-        // graphes 
+        // graphe vente 
+        function grapheVente(tab, xtab) {
+            const canvas = document.getElementById("venteChart");
+            const chart = canvas.getContext("2d");
+
+            chart.clearRect(0, 0, canvas.width, canvas.height);
+
+            const largeur = 30;
+            const space = 20;
+            let x = 15;
+
+            const max = Math.max(...tab);
+
+            chart.font = " 14px Arial";
+            chart.textAlign="center";
+            
+
+            tab.forEach((val, i) => {
+                let h = (val / max) * 100;
+
+                chart.fillStyle = "grey";
+                chart.fillRect(x, canvas.height - h - 30, largeur, h);
+
+                chart.fillStyle = "black";
+                chart.fillText(val, x + 10, canvas.height - h - 35); // ecrire valeur fou9 l barre
+                chart.fillText(xtab[i], x + 5, canvas.height - 10); // ecrire texte taht l barre
+
+                x += largeur + space;
+            });
+        }  
+
+        const venteJour = [56, 35, 15, 22, 17, 50, 63]; 
+        const xJour = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+
+        const venteSem = [74, 67, 45, 96]; 
+        const xSem = ["Sem-1", "Sem-2" ,"Sem-3" , "Sem-4"];
+
+        const venteMois3 = [320, 250, 160]; 
+        const xMois3 = ["M-3", "M-2", "M-1"];
+
+        const venteMois6 = [120, 250, 135, 150, 169, 210];
+        const xMois6 = ["M-6", "M-5", "M-4", "M-3", "M-2", "M-1"];
+
         
 
         // filtrage
         function filtrer() {
             let val_cat = category.value;
-
+            let val_period = period.value;
             let prod = produits;
 
             if (val_cat !== "tous") {
                 prod = produits.filter(p => p.category === val_cat);
             }
             affichage(prod);
-
-
-        }
-
+            
+            if (val_period == "1") {
+                grapheVente(venteSem, xSem);
+            }
+            else if (val_period == "3") {
+                grapheVente(venteMois3, xMois3);
+            }
+            else if (val_period == "6") {
+                grapheVente(venteMois6, xMois6);
+            }
+            else {
+                grapheVente(venteJour, xJour);
+            }
+            }
+    
         filterBtn.addEventListener("click", filtrer);
-
+        grapheVente(venteJour, xJour);
 
         //effacer filtrage
         function reset(){
@@ -452,6 +534,9 @@
             populaire.innerText="- - -";
             let top=document.getElementById("top");
             top.innerText="";
+            const canvas = document.getElementById("venteChart");
+            const chart = canvas.getContext("2d");
+            chart.clearRect(0, 0, canvas.width, canvas.height);
         }
         resetBtn.addEventListener('click', reset);
 
