@@ -465,9 +465,27 @@
         const filterBtn = document.getElementById("start");
         const resetBtn = document.getElementById("reset");
  
-        // graphe vente 
-        function grapheVente(tab, xtab) {
-            const canvas = document.getElementById("venteChart");
+        // graphe vente et stock
+
+        const venteJour = [56, 35, 15, 22, 17, 50, 63]; 
+        const stockJour = [42, 78, 60, 12, 55, 33, 10]; 
+        const xJour = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+
+        const venteSem = [74, 67, 45, 96]; 
+        const stockSem = [120, 88, 108, 150]; 
+        const xSem = ["Sem-1", "Sem-2" ,"Sem-3" , "Sem-4"];
+
+        const venteMois3 = [320, 250, 160]; 
+        const stockMois3 = [400, 257, 231]; 
+        const xMois3 = ["M-3", "M-2", "M-1"];
+
+        const venteMois6 = [120, 250, 135, 150, 169, 210];
+        const stockMois6 = [560, 274, 301, 400, 257, 231];
+        const xMois6 = ["M-6", "M-5", "M-4", "M-3", "M-2", "M-1"];
+
+        
+        function graphe(tab, xtab,chartjs,color) {
+            const canvas = document.getElementById(chartjs);
             const chart = canvas.getContext("2d");
 
             chart.clearRect(0, 0, canvas.width, canvas.height);
@@ -481,34 +499,18 @@
             chart.font = " 14px Arial";
             chart.textAlign="center";
         
-
             tab.forEach((val, i) => {
                 let h = (val / max) * 100;
 
-                chart.fillStyle = "paleturquoise";
+                chart.fillStyle = color;
                 chart.fillRect(x, canvas.height - h - 30, largeur, h);
 
                 chart.fillStyle = "black";
                 chart.fillText(val, x + 10, canvas.height - h - 35); // ecrire valeur fou9 l barre
                 chart.fillText(xtab[i], x + 5, canvas.height - 10); // ecrire texte taht l barre
-
                 x += largeur + space;
             });
-        }  
-
-        const venteJour = [56, 35, 15, 22, 17, 50, 63]; 
-        const xJour = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-
-        const venteSem = [74, 67, 45, 96]; 
-        const xSem = ["Sem-1", "Sem-2" ,"Sem-3" , "Sem-4"];
-
-        const venteMois3 = [320, 250, 160]; 
-        const xMois3 = ["M-3", "M-2", "M-1"];
-
-        const venteMois6 = [120, 250, 135, 150, 169, 210];
-        const xMois6 = ["M-6", "M-5", "M-4", "M-3", "M-2", "M-1"];
-
-        
+        }    
 
         // filtrage
         function filtrer() {
@@ -522,21 +524,28 @@
             affichage(prod);
             
             if (val_period == "1") {
-                grapheVente(venteSem, xSem);
+                graphe(venteSem, xSem,"venteChart","paleturquoise");
+                graphe(stockSem, xSem,"stockChart","plum");
             }
             else if (val_period == "3") {
-                grapheVente(venteMois3, xMois3);
+                graphe(venteMois3, xMois3,"venteChart","paleturquoise");
+                graphe(stockMois3, xMois3,"stockChart","plum");
             }
             else if (val_period == "6") {
-                grapheVente(venteMois6, xMois6);
+                graphe(venteMois6, xMois6,"venteChart","paleturquoise");
+                graphe(stockMois6, xMois6,"stockChart","plum");
             }
             else {
-                grapheVente(venteJour, xJour);
+                graphe(venteJour, xJour,"venteChart","paleturquoise");
+                graphe(stockJour, xJour,"stockChart","plum");
             }
-            }
+        }
+
     
         filterBtn.addEventListener("click", filtrer);
-        grapheVente(venteJour, xJour);
+
+        graphe(venteJour, xJour,"venteChart","paleturquoise");
+        graphe(stockJour, xJour,"stockChart","plum");
 
         //effacer filtrage
         function reset(){
@@ -547,9 +556,8 @@
             populaire.innerText="- - -";
             let top=document.getElementById("top");
             top.innerText="";
-            const canvas = document.getElementById("venteChart");
-            const chart = canvas.getContext("2d");
-            chart.clearRect(0, 0, canvas.width, canvas.height);
+            graphe(venteJour, xJour,"venteChart","paleturquoise");
+            graphe(stockJour, xJour,"stockChart","plum");
         }
         resetBtn.addEventListener('click', reset);
 
