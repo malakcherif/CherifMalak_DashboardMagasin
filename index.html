@@ -73,21 +73,27 @@
         color: black;
     }
     body.dark, body.dark main{ 
-        background-color: rgb(22, 37, 72); 
+        background-color: rgb(33, 54, 103); 
         color: #f5f5f5;
     }   
     body.dark header {
-        background-color: rgb(22, 37, 72);
+        background-color:rgb(33, 54, 103) ;
         color: whitesmoke;
     }
-    body.dark .card , body.dark .infos ,body.dark .class_ajoute{
-        background-color: #8d8db1; 
+    body.dark h1{
+        color: whitesmoke;
     }
-    body.dark aside , body.dark footer ,body.dark .box { 
-        background-color: #a9a9ca; 
+    body.dark .infos ,body.dark .meilleur{
+        background-color: rgb(174, 188, 220); 
+    }
+    body.dark .class_ajoute{
+        background-color: rgb(214, 209, 209); 
+    }
+    body.dark aside , body.dark footer  ,body.dark .box ,body.dark footer a{ 
+        background-color: rgb(174, 188, 220); 
     } 
     body.dark button { 
-        background-color: grey; 
+        background-color: rgb(108, 112, 195); 
         color: white;
     }
     
@@ -98,16 +104,14 @@
         background-color: rgb(247, 246, 246);
     }
     @keyframes anim {
-        0% { opacity: 1; }
-        50% { opacity: 0.5;  }
-        100% { opacity: 1;  }
+        0% {  scale: 1.8;}
+        50% {  scale: 0.9;  }
+        100% {  scale: 1.8; }
     }
     header {       
         background:beige;
         border-radius: 20px;
         text-align: center;
-        position: sticky;
-        top: 0;
     }
     header h1{
         font-size:x-large;
@@ -115,7 +119,7 @@
         font-weight: bolder;
         font-style: italic;
         color: brown;
-        animation: anim 2s ease-in-out infinite;
+        animation: anim 4s ease-in-out infinite;
     }
     .container {
         display: flex;
@@ -135,7 +139,7 @@
         list-style: none;
         padding: 0;
     }
-    aside ul li   {
+    aside ul li  {
         gap: 10px;
         background-color: rgb(245, 225, 225); 
         border-radius:15px;
@@ -152,14 +156,12 @@
     aside ul li:hover ,aside ul a:hover {
         background-color: rgb(247, 243, 243); 
     }
-    
     aside button{
         margin-top: 200px;
     }
     aside{
         background:beige;
         padding:20px;
-        gap: 1px;
         width:250px;
         border-radius: 20px;
         box-shadow:0 1px 5px palegoldenrod;
@@ -223,14 +225,12 @@
         background-color: black;
         color: white;
     }
-    .chartjs h3{
-        font-size: 18px;
-        font-weight: 600;
-    }
+    
     aside h2{
         font-size: larger;
         text-transform: uppercase;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: rgb(214, 136, 136);
     }
     footer,a{
         background:beige;
@@ -243,6 +243,14 @@
     }   
     a{
         font-size: 15px;
+    }
+    .meilleur {
+        margin: 30px;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: #f4e1e1;
+        text-align: center;
+        
     }    
     .grid {
         display: flex;
@@ -251,13 +259,13 @@
         margin: 10px;
         width: 100px;
     }
-
-    .grid .card {
-        padding: 10px;
+    .meilleur .grid  {
+        display: flex;           
+        justify-content: center;
+        gap: 20px;               
+        width: auto;
         border-radius: 12px;
-        background-color: white;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        text-align: center;
+        text-align: center; 
     }
     .grid img {
         align-items: center;
@@ -268,7 +276,7 @@
     }
     .class_ajoute {
         padding: 10px;
-        background: #f4e1e1;
+        background: white;
         border-radius: 10px;
         margin: 5px;
         width: 150px;
@@ -285,18 +293,28 @@
     .class_ajoute p span{
         font-weight:700 ;
     }
+    .chartjs h3{
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+    }
     .chartjs {
         display: flex;
         gap: 20px;
-        flex-wrap: wrap;
+        flex-wrap: wrap; 
         margin: 20px ;
+        flex-direction: column;
     }
     .chartjs .box {
-        width: 400px;
+        width: auto;
         height: auto;
-        padding: 15px;
         background: white;
-        border-radius: 12px;
+        border-radius: 15px;
+    }
+    
+    .chartjs .box canvas {
+        display: block;      
+        margin: auto;  
     }
 
 </style>
@@ -361,15 +379,15 @@
                 <div class="chartjs">
                     <div id="prod_vente">
                         <div class="box">
-                            <h3>Suivie de ventes</h3>
-                            <canvas id="venteChart"></canvas>
+                            <h3>Suivi des ventes</h3>
+                            <canvas id="venteChart"width="400" height="150"></canvas>
                         </div>
                     </div>
 
                     <div id="prod_stock">
                         <div class="box">
-                            <h3>Suivie de stock</h3>
-                            <canvas id="stockChart"></canvas>
+                            <h3>Suivi des stocks</h3>
+                            <canvas id="stockChart" width="400" height="150"></canvas>
                         </div>
                     </div>
 
@@ -379,7 +397,7 @@
 
                     <div class="meilleur">
                         <h3>Meilleurs Produits</h3>
-                        <div class="grid" id="top"></div>
+                        <div class="grid" id="top">- - - -</div>
                     </div>
                     
                 </div>    
@@ -387,46 +405,48 @@
     </div>
     <footer id="contact">
         <h1>Pour signaler un probleme , voici le contact :</h1>
-        <a href="malak.cherif@etudiant-fst.utm.tn">✉️ malak.cherif@etudiant-fst.utm.tn ✉️</a>
+        <a href="mailto:malak.cherif@etudiant-fst.utm.tn">✉️ malak.cherif@etudiant-fst.utm.tn ✉️</a>
     </footer>
     <script>
+
         // changer theme
         const btnMode=document.getElementById("toggleTheme")
         btnMode.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
-            if(document.body.classList.contains("dark")){
+            document.body.classList.toggle("dark"); //si le theme appliqué dark on l'enlève sinon sera appliqué
+            if(document.body.classList.contains("dark")){ // changer le texte des boutons
                 btnMode.textContent = "☀️ Mode Clair";
-            } else {
+            } 
+            else {
                 btnMode.textContent = "🌙 Mode Sombre";
             }
         });
 
         // les produits a suivre 
         const produits = [
-            { nom: "Set Tendance pour femme", category: "vetements", prix: 99.90, stock: 35, img: "https://cdn.pixabay.com/photo/2020/05/22/14/59/fashion-5205675_960_720.jpg" },
-            { nom: "Costume Bleu pour Homme", category: "vetements", prix: 120.65, stock: 15, img: "https://cdn.pixabay.com/photo/2017/08/10/08/00/suit-2619784_640.jpg" },
-            { nom: "Montre", category: "autres", prix:255.99, stock: 120, img: "https://cdn.pixabay.com/photo/2022/12/14/16/10/ediffice-7655723_640.jpg" },
-            { nom: "Bijoux : Boucles avec bagues", category: "autres", prix: 67.99, stock: 20, img: "https://cdn.pixabay.com/photo/2024/06/18/09/45/jewelry-8837559_640.png" },
-            { nom: "Pc Mac", category: "electro", prix: 4500.99, stock: 250, img: "https://cdn.pixabay.com/photo/2018/02/10/18/16/apple-3144234_640.jpg" },
-            { nom: "Machine à laver", category: "electro", prix: 67.99, stock: 20, img: "https://cdn.pixabay.com/photo/2016/01/28/22/07/washing-machine-1167053_640.jpg" },
-            { nom: "Salon", category: "decor", prix: 2500.5, stock: 100, img: "https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_640.jpg" },
-            { nom: "Salle à manger", category: "decor", prix: 1570.5, stock: 50, img: "https://cdn.pixabay.com/photo/2021/09/20/19/00/dinning-table-6641707_640.jpg" },
+            { nom: "Set Tendance pour femme", category: "vetements", prix: 99.90, stock:35, img: "https://cdn.pixabay.com/photo/2020/05/22/14/59/fashion-5205675_960_720.jpg" },
+            { nom: "Costume pour homme", category: "vetements", prix: 120.65, stock:15, img: "https://cdn.pixabay.com/photo/2017/08/10/08/00/suit-2619784_640.jpg" },
+            { nom: "Montre pour homme", category: "autres", prix:255.99, stock:120, img: "https://cdn.pixabay.com/photo/2022/12/14/16/10/ediffice-7655723_640.jpg" },
+            { nom: "Bijoux pour femme", category: "autres", prix: 67.99, stock:20, img: "https://cdn.pixabay.com/photo/2024/06/18/09/45/jewelry-8837559_640.png" },
+            { nom: "Pc Mac", category: "electro", prix: 4500.99, stock:250, img: "https://cdn.pixabay.com/photo/2018/02/10/18/16/apple-3144234_640.jpg" },
+            { nom: "Machine à laver", category: "electro", prix:67.99, stock:20, img: "https://cdn.pixabay.com/photo/2016/01/28/22/07/washing-machine-1167053_640.jpg" },
+            { nom: "Salon", category: "decor", prix: 2500.5, stock:100, img: "https://cdn.pixabay.com/photo/2017/09/09/18/25/living-room-2732939_640.jpg" },
+            { nom: "Salle à manger", category: "decor", prix: 1570.5, stock:50, img: "https://cdn.pixabay.com/photo/2021/09/20/19/00/dinning-table-6641707_640.jpg" },
         ];
 
         function calculVentesTotales(calcul) {
             let total = 0;
-            calcul.forEach(p => total =total + p.prix);
-            return total.toFixed(2);
+            calcul.forEach(p => total =total + p.prix); // calculer le prix total de tous les produits
+            return total.toFixed(2); //2 chiffres seulement apres ,
         }
 
         function calculStockTotal(calcul) {
             let total = 0;
-            calcul.forEach(p =>total =total + p.stock);
+            calcul.forEach(p =>total =total + p.stock); // calculer tous les produits en stock
             return total;
         }
 
         function produitPopulaire(calcul) {
-            let max = calcul.reduce((a, b) => a.stock > b.stock ? a : b); //tcompari qui a stock plus eleve 
+            let max = calcul.reduce((a, b) => a.stock > b.stock ? a : b); //comparer les produits selon leurs stocks 
             return max.nom;
         }
 
@@ -434,29 +454,29 @@
             const top = document.getElementById("top");
             top.innerHTML = ""; // effacer ancien contenu
 
-            best.sort((a, b) => b.stock - a.stock);
+            best.sort((a, b) => b.stock - a.stock); // ordonner les produits selon le stock (ordre décroissant)
 
-            best.slice(0, 3).forEach(p => {
+            best.slice(0,4 ).forEach(p => { // afficher seulement les 4 premiers 
                 const card = document.createElement("div");
                 card.className = "class_ajoute";
                 card.innerHTML = `
                     <img src="${p.img}">
                     <h4>${p.nom}</h4>
-                    <p><span>Prix :</span> \n ${p.prix} DT</p>
-                    <p><span>Stock :</span> \n ${p.stock}</p>
+                    <p><span>Prix : </span>${p.prix}DT</p>
+                    <p><span>Stock : </span>${p.stock}</p>
                 `;
-                top.appendChild(card);
+                top.appendChild(card); //ajouter le produit dans la partie de meilleurs produits
             });
         }
 
-        function affichage(info) {
+        function affichage(info) { //recuperer les donnees pour les afficher
             let total=document.getElementById("total");
             let stock=document.getElementById("stock");
             let populaire=document.getElementById("populaire");
-            total.innerText = calculVentesTotales(info) + " DT";
-            stock.innerText = calculStockTotal(info);
-            populaire.innerText = produitPopulaire(info);
-            afficherMeilleurProduits(info);
+            total.innerText = calculVentesTotales(info) + " DT"; // ecrire le prix total 
+            stock.innerText = calculStockTotal(info); //ecrire le stock total
+            populaire.innerText = produitPopulaire(info); //ecrire le produit avec le stock le plus eleve
+            afficherMeilleurProduits(info); // ajouter les meilleurs produits
         }
 
        
@@ -480,7 +500,7 @@
         const xMois3 = ["M-3", "M-2", "M-1"];
 
         const venteMois6 = [120, 250, 135, 150, 169, 210];
-        const stockMois6 = [560, 274, 301, 400, 257, 231];
+        const stockMois6 = [400, 274, 301, 380, 257, 231];
         const xMois6 = ["M-6", "M-5", "M-4", "M-3", "M-2", "M-1"];
 
         
@@ -488,27 +508,27 @@
             const canvas = document.getElementById(chartjs);
             const chart = canvas.getContext("2d");
 
-            chart.clearRect(0, 0, canvas.width, canvas.height);
+            chart.clearRect(0, 0, canvas.width, canvas.height ); // effacer avant de commencer le dessin
 
-            const largeur = 30;
-            const space = 20;
-            let x = 15;
-
-            const max = Math.max(...tab);
+            const largeur = 35; // la largeur des rectangles
+            const space = 20; // les ecpaces  entres les rectangles
+            let x = 10; //le debut de graphe
 
             chart.font = " 14px Arial";
             chart.textAlign="center";
         
-            tab.forEach((val, i) => {
-                let h = (val / max) * 100;
-
+            tab.forEach((val, i) => { //pour dessiner une barre pour chaque valeur de tab
+                let h=val;
+                if (h>100){
+                    h=h/4; //minimiser l'hauteur pour la garder dans la carte
+                }
                 chart.fillStyle = color;
-                chart.fillRect(x, canvas.height - h - 30, largeur, h);
+                chart.fillRect(x, canvas.height-h-30, largeur, h);
 
                 chart.fillStyle = "black";
-                chart.fillText(val, x + 10, canvas.height - h - 35); // ecrire valeur fou9 l barre
-                chart.fillText(xtab[i], x + 5, canvas.height - 10); // ecrire texte taht l barre
-                x += largeur + space;
+                chart.fillText(val, x + 10, canvas.height -h- 40); // pour ecrire valeur au dessus de la barre
+                chart.fillText(xtab[i], x + 5, canvas.height -5); //  pour ecrire texte au dessous de la barre
+                x += largeur + space; //espacement entre les barres du graphe
             });
         }    
 
@@ -517,12 +537,12 @@
             let val_cat = category.value;
             let val_period = period.value;
             let prod = produits;
-
+            //filtrage selon categorie
             if (val_cat !== "tous") {
-                prod = produits.filter(p => p.category === val_cat);
+                prod = produits.filter(p => p.category === val_cat); //selectionner les produits de la categorie indiquée
             }
             affichage(prod);
-            
+            //filtrage selon la periode
             if (val_period == "1") {
                 graphe(venteSem, xSem,"venteChart","paleturquoise");
                 graphe(stockSem, xSem,"stockChart","plum");
@@ -541,7 +561,6 @@
             }
         }
 
-    
         filterBtn.addEventListener("click", filtrer);
 
         graphe(venteJour, xJour,"venteChart","paleturquoise");
@@ -555,12 +574,11 @@
             stock.innerText="0";
             populaire.innerText="- - -";
             let top=document.getElementById("top");
-            top.innerText="";
+            top.innerText="- - - - -";
             graphe(venteJour, xJour,"venteChart","paleturquoise");
             graphe(stockJour, xJour,"stockChart","plum");
         }
         resetBtn.addEventListener('click', reset);
-
     </script>    
 </body>
 </html>
