@@ -1,6 +1,6 @@
 Nom du Projet : 
 
-  Dashboard d'un magasin en ligne
+  - Dashboard d'un magasin en ligne
   
 Description :
 
@@ -35,30 +35,30 @@ Lien vers la page GitHub Pages (rendu final) :
 
 Nouveautés explorées :
 
-    - Manipulation du "Git" et "GitHub" 
-    - Comment lier mon code à l'interface de "GitHub" 
-    - "GitHub Pages" , le lien de dernier commit pour suivi en live et faciliter la visualisation
-    - Manipulation du "Canvas" et dessin des graphiques
-    - Manipulation des classes dynamiques (classList.toggle()) pour le changement du thème
-    - Intéret et importance du "DOM" dans le code 
-    - Filtrage des tableaux multidimensionnels (filter,forEach)
-    - Annulation du filtrage et initialisation des labels et graphes
+  - Manipulation du "Git" et "GitHub"
+  - Comment lier mon code à l'interface de "GitHub"
+  - "GitHub Pages" , le lien de dernier commit pour suivi en live et faciliter la visualisation
+  - Manipulation du "Canvas" et dessin des graphiques
+  -  Manipulation des classes dynamiques (classList.toggle()) pour le changement du thème
+  -  Intéret et importance du "DOM" dans le code
+  -  Filtrage des tableaux multidimensionnels (filter,forEach)
+  -  Annulation du filtrage et initialisation des labels et graphes
 
 Difficultés rencontrées : 
 
-    - Mal compréhension du sujet au début : commencer à travailler un autre sujet comme site en ligne présentant des produits et leurs informations pour l'achat -> perte de temps
-    - Les dimensions des graphiques :Les barres invisibles et l'hauteur est énorme ,hors du box personnalisé pour les graphes
-    - Graphique grand ou déformé
-    - Positionnement des valeurs et du texte à l'entour du graphes
-    - Le filtrage par période et le changement des graphes simultanément
-    - Faire deux fonctions presque identiques pour les graphes de vente et stock
-    - Hébergement du code
-    - Importation des images des produits
+  - Mal compréhension du sujet au début : commencer à travailler un autre sujet comme site en ligne présentant des produits et leurs informations pour l'achat -> perte de temps
+  - Les dimensions des graphiques :Les barres invisibles et l'hauteur est énorme ,hors du box personnalisé pour les graphes
+  - Graphique grand ou déformé
+  - Positionnement des valeurs et du texte à l'entour du graphes
+  - Le filtrage par période et le changement des graphes simultanément
+  - Faire deux fonctions presque identiques pour les graphes de vente et stock
+  - Hébergement du code
+  - Importation des images des produits
 
 Solutions apportées :
 
-    - Mise à jour du code manuelle et test au fur et à mesure
-    - Modification des dimensions et hauteur et visualisation de résultat sur page web
-    - Recherche sur google et dans le cours pour la compréhension des erreurs et correction 
-    - Revenir aux anciens tps pour visualiser quelques details
-    - Utiliser pixabay pour importer les images facilement
+  - Mise à jour du code manuelle et test au fur et à mesure
+  - Modification des dimensions et hauteur et visualisation de résultat sur page web*
+  - Recherche sur google et dans le cours pour la compréhension des erreurs et correction 
+  - Revenir aux anciens tps pour visualiser quelques details
+  - Utiliser pixabay pour importer les images facilement
